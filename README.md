@@ -1,6 +1,29 @@
 # OLIØN Video Toolkit
 
+```
+══════════════════════════════════
+        ╔═╗ ╦   ╦ ╔═╗ ╔╗╔
+        ║ ║ ║   ║ ║/║ ║║║
+        ╚═╝ ╩═╝ ╩ ╚═╝ ╝╚╝
+    V I D E O   T O O L K I T
+   v1.0 · FFmpeg on your phone
+══════════════════════════════════
+```
+
 A menu-driven video and audio toolkit for **Termux (Android)**, built on FFmpeg. It runs fully on your phone, with no PC needed.
+
+## Quick start
+
+```
+pkg update -y
+pkg install python git ffmpeg yt-dlp termux-api -y
+termux-setup-storage
+git clone https://github.com/princeoken4-create/OLION-VIDEO-TOOLKIT.git
+cd OLION-VIDEO-TOOLKIT
+python videotoolkit.py
+```
+
+Tap **Allow** when Android asks for storage permission.
 
 ## Features
 
@@ -19,25 +42,15 @@ A menu-driven video and audio toolkit for **Termux (Android)**, built on FFmpeg.
 | 11 | Watch folder mode (auto-compress new videos) |
 | 12 | Fix variable frame rate (fixes audio drift from phone recordings) |
 
+Every FFmpeg job shows a live progress bar, and long jobs keep your phone awake until they finish.
+
 ## Requirements
 
 - Android phone with **Termux** from [F-Droid](https://f-droid.org/packages/com.termux/) or GitHub. The Play Store version is outdated.
 - About 1 GB of free storage, plus space for your videos
 - **Termux:API** app (optional, only for notifications)
 
-## Installation
-
-```
-pkg update -y
-pkg install python git ffmpeg yt-dlp termux-api -y
-termux-setup-storage
-git clone https://github.com/princeoken4-create/olion-video-toolkit.git
-cd olion-video-toolkit
-```
-
-Tap **Allow** when Android asks for storage permission.
-
-Or run the setup script after cloning: `bash setup.sh`
+You can also run `bash setup.sh` after cloning to install everything in one go.
 
 ## Usage
 
@@ -56,7 +69,7 @@ Type the number of the option you want and follow the prompts.
 ## Warnings
 
 - **Storage permission:** if you see "No such file or directory" for `~/storage/...`, run `termux-setup-storage` again.
-- **Battery:** processing is heavy on a phone. Plug in your charger for long jobs. Long jobs take a wake lock to keep the CPU awake.
+- **Battery:** processing is heavy on a phone. Plug in your charger for long jobs.
 - **Keep Termux open:** Android may stop Termux in the background. Keep it on screen (or use Termux:Float) during long jobs.
 - **Speed:** budget phones can be slow, especially for reverse, interpolation, batch compress and fix VFR. Test on short clips first.
 - **Quality loss:** re-encoding lowers quality a little each time. Keep your original files.
@@ -71,11 +84,12 @@ Type the number of the option you want and follow the prompts.
 
 | Problem | Fix |
 |---|---|
-| `ffmpeg: command not found` | `pkg install ffmpeg` |
+| `ffmpeg not found` | `pkg install ffmpeg` |
 | `yt-dlp not found` | `pkg install yt-dlp` |
 | Notifications not showing | Install the Termux:API app, then `pkg install termux-api` |
 | Output file not created | Include the extension in the name (`.mp4`, `.mp3`) |
 | `fatal: detected dubious ownership` | Keep the repo in Termux's home folder, not in `/storage/...` |
+| Colors look wrong | Run `NO_COLOR=1 python videotoolkit.py` |
 | Clone is slow or drops | `git clone --depth=1 <repo-url>` |
 
 ## Contributing
@@ -84,7 +98,7 @@ Bug reports and pull requests are welcome. Please test on a real Termux install 
 
 ## License
 
-Add a `LICENSE` file (for example MIT) to the repo.
+MIT. See the `LICENSE` file.
 
 ---
 
