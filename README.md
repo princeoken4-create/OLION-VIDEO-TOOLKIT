@@ -31,7 +31,7 @@ A menu-driven video and audio toolkit for **Termux (Android)**, built on FFmpeg.
 pkg update -y
 pkg install python git ffmpeg yt-dlp termux-api -y
 termux-setup-storage
-git clone https://github.com/YOUR-USERNAME/olion-video-toolkit.git
+git clone https://github.com/princeoken4-create/olion-video-toolkit.git
 cd olion-video-toolkit
 ```
 
