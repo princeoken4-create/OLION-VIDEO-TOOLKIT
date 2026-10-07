@@ -6,11 +6,16 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 
 # Change this one line if your phone's storage path is different.
 SAVE_DIR = os.path.expanduser("~/storage/downloads")
+
+VERSION = "1.0"
+# Colors are only used in a real terminal (set NO_COLOR=1 to turn them off).
+USE_COLOR = sys.stdout.isatty() and not os.environ.get("NO_COLOR")
 
 VIDEO_EXTS = (".mp4", ".mkv", ".mov", ".avi", ".webm")
 
@@ -28,6 +33,30 @@ _filter_cache = {}
 # ═══════════════════════════════════════════
 #  HELPERS
 # ═══════════════════════════════════════════
+
+def paint(text, color):
+    """Wrap text in a 256-color ANSI code (only when colors are enabled)."""
+    if not USE_COLOR:
+        return text
+    return f"\033[38;5;{color}m{text}\033[0m"
+
+
+def print_banner():
+    width = 34
+    art = [
+        "╔═╗ ╦   ╦ ╔═╗ ╔╗╔",
+        "║ ║ ║   ║ ║/║ ║║║",
+        "╚═╝ ╩═╝ ╩ ╚═╝ ╝╚╝",
+    ]
+    colors = [75, 135, 205]  # blue, purple, pink
+    print()
+    print(paint("═" * width, 240))
+    for line, color in zip(art, colors):
+        print(paint(line.center(width), color))
+    print(paint("V I D E O   T O O L K I T".center(width), 252))
+    print(paint(f"v{VERSION} · FFmpeg on your phone".center(width), 244))
+    print(paint("═" * width, 240))
+
 
 def check_tools():
     for tool in ("ffmpeg", "ffprobe"):
@@ -809,9 +838,9 @@ ACTIONS = {key: action for key, _, action in MENU}
 
 def main():
     check_tools()
+    print_banner()
     while True:
-        print("\nOLIØN VIDEO TOOLKIT")
-        print("=====================")
+        print("\n── MENU ──")
         for key, label, _ in MENU:
             print(f"{key}. {label}")
         print("0. Exit")
